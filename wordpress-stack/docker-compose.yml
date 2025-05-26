@@ -31,7 +31,6 @@ services:
   # WordPress
   wordpress:
     build: ./wordpress
-    image: wordpress:6.3-php8.1-apache
     container_name: wordpress_app
     restart: unless-stopped
     ports:
@@ -48,7 +47,6 @@ services:
       - redis
     networks:
       - wordpress_network
-
   # phpMyAdmin (optionnel)
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

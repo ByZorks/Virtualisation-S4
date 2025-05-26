@@ -2,6 +2,8 @@ FROM wordpress:6.3-php8.1-apache
 
 # Installation des extensions PHP nécessaires
 RUN apt-get update && apt-get install -y \
+    default-mysql-client \
+    redis-tools \
     libzip-dev \
     zip \
     unzip \
@@ -15,6 +17,6 @@ RUN pecl install redis \
 COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Installation de WP-CLI
-RUN curl -O https://raw.githubusercontent.com/wp-cli/wp-cli/master/installer.php \
-    && php installer.php --install-dir=/usr/local/bin --filename=wp \
-    && chmod +x /usr/local/bin/wp
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
